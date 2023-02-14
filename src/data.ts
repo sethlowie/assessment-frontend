@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+const dataSchema = <T extends z.ZodTypeAny>(schema: T) => z.object({
+    data: schema,
+});
+
 const listSchema = z.object({
     id: z.number(),
     components: z.array(z.number()),
@@ -14,6 +18,8 @@ const imageSchema = z.object({
     }),
 });
 
+export type Image = z.infer<typeof imageSchema>;
+
 const weatherSchema = z.object({
     id: z.number(),
     type: z.literal("weather"),
@@ -23,6 +29,8 @@ const weatherSchema = z.object({
     }),
 });
 
+export type Weather = z.infer<typeof imageSchema>;
+
 const componentSchema = z.discriminatedUnion("type", [imageSchema, weatherSchema]);
 
 export const pageSchema = z.object({
@@ -31,3 +39,7 @@ export const pageSchema = z.object({
 });
 
 export type Page = z.infer<typeof pageSchema>;
+
+const pageResponseSchema = dataSchema(pageSchema);
+
+export type PageResponse = z.infer<typeof pageResponseSchema>;
