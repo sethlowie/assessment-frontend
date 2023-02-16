@@ -1,0 +1,13 @@
+.Wrapper {
+    display: flex;
+}
+
+.Item {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Day {
+    text-align: center;
+}
