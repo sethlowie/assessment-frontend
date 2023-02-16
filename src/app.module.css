@@ -1,0 +1,8 @@
+.Wrapper {
+    padding: 2rem;
+}
+
+.Wrapper > *:not(:first-child) {
+    margin-top: 1rem;
+}
+
