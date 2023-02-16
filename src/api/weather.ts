@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import { z } from "zod";
+import { responseSchema } from "./response";
 
 export const weatherSchema = z.object({
     id: z.number(),
@@ -15,7 +16,9 @@ const upcomingWeatherSchema = z.object({
     day: z.string(), // TODO: narrow this type
     condition: z.string(), // TODO: narrow this type
     conditionName: z.string(),
-})
+});
+
+export type UpcomingWeather = z.infer<typeof upcomingWeatherSchema>;
 
 export const weatherDetailsSchema = z.object({
     lon: z.string(),
@@ -27,3 +30,10 @@ export const weatherDetailsSchema = z.object({
     location: z.string(),
     upcomming: z.array(upcomingWeatherSchema),
 });
+
+export type WeatherDetails = z.infer<typeof weatherDetailsSchema>;
+
+export const weatherDetailsResponse = responseSchema(weatherDetailsSchema);
+
+export type WeatherDetailsResponse = z.infer<typeof weatherDetailsResponse>;
+
